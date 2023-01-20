@@ -28,8 +28,8 @@ jobs:
       run: docker run --name newman-container -v my-vol newmandocker
     - name: list volumes
       run: docker volume ls
-    - name: inspect volumes
-      run: docker volume inspect mydir
+    - name: check1
+      run: ls -a
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
