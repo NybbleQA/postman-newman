@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag newmandocker:$(date +%s)
+      run: docker build . -t newmandocker
     - name: Run docker container
-      run: docker run newmandocker:$(date +%s)
+      run: docker run newmandocker
 
