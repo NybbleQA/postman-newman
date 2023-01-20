@@ -16,7 +16,7 @@ jobs:
     - name: check1
       run: ls
     - name: docker try
-      run: docker volume create my-vol
+      run: docker volume create --name my-vol --opt type=none --opt device=/ --opt o=bind
     - name: list volumes
       run: docker volume ls
     - name: inspect volumes
@@ -24,8 +24,8 @@ jobs:
     - name: Build the Docker image
       run: docker build . -t newmandocker
     - name: Run docker container
-#      run: docker run --name newman-container --mount source=my-vol,target=/newman newmandocker
-      run: docker run --name newman-container -v "$(pwd):/mydir" newmandocker
+#      run: docker run --name newman-container --mount type=bind,source=my-vol,target=/newman newmandocker
+      run: docker run --name newman-container -v my-vol newmandocker
     - name: list volumes
       run: docker volume ls
     - name: inspect volumes
