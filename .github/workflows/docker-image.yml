@@ -36,5 +36,5 @@ jobs:
       with:
           name: test report
           path: |
-            /var/lib/docker/volumes/my-vol/_data
+            /var/lib/docker/volumes/*
 
