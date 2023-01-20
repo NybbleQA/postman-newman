@@ -27,8 +27,11 @@ jobs:
       run: docker build . -t newmandocker
     - name: check3
       run: ls -a
+    - name: list volumes
+      run: docker volume ls
     - name: Run docker container
-      run: docker run --name newman-container --mount source=my-vol,target=/newman newmandocker
+#      run: docker run --name newman-container --mount source=my-vol,target=/newman newmandocker
+      run: docker run --name newman-container -v "$(pwd):/mydir" newmandocker
     - name: check2
       run: ls -a
     - name: Archive production artifacts
