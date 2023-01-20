@@ -22,7 +22,7 @@ jobs:
 
     - name: Run Buildx
       run: |
-        docker buildx build -f Dockerfile --output . /newman
+        docker buildx build -f Dockerfile --output /newman .
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
