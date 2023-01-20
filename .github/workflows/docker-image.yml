@@ -22,19 +22,19 @@ jobs:
     - name: inspect volumes
       run: docker volume inspect my-vol
     - name: check1
-      run: ls
+      run: ls -a
     - name: Build the Docker image
       run: docker build . -t newmandocker
     - name: check3
-      run: ls
+      run: ls -a
     - name: Run docker container
-      run: docker run --name newman-container --mount source=reportsvolume,target=/newman newmandocker
+      run: docker run --name newman-container --mount source=my-vol,target=/newman newmandocker
     - name: check2
-      run: ls
+      run: ls -a
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
           name: test report
           path: |
-            newman/**
+            /var/lib/docker/volumes/my-vol/_data
 
