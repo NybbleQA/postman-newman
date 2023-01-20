@@ -37,9 +37,9 @@ jobs:
     - name: check2
       run: ls newman/ -a
     - name: check2
-      run: ls . -a
+      run: ls /var/lib/docker/volumes -a
     - name: check2
-      run: ls .. -a
+      run: ls /var/lib -a
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
