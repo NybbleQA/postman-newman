@@ -29,8 +29,10 @@ jobs:
       run: docker build . -t newmandocker
     - name: Run docker container
 #      run: docker run --name newman-container --mount type=bind,source=my-vol,target=/newman newmandocker
-      run: docker run --name newman-container -v my-vol newmandocker
+      run: docker run --name newman-container -v my-vol:/newman newmandocker
     - name: list volumes
+      run: docker volume ls
+    - name: cd reports
       run: docker volume ls
     - name: check1
       run: ls -a
@@ -39,5 +41,5 @@ jobs:
       with:
           name: test report
           path: |
-            /var/lib/docker/volumes/*
+            /reports/*
 
