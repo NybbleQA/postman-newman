@@ -20,16 +20,16 @@ jobs:
     - name: pwd
       run: pwd
     - name: docker try
-      run: docker volume create --name my-vol --opt type=none --opt device=/reports --opt o=bind
+      run: docker volume create --name myvol --opt type=none --opt device=/reports --opt o=bind
     - name: list volumes
       run: docker volume ls
     - name: inspect volumes
-      run: docker volume inspect my-vol
+      run: docker volume inspect myvol
     - name: Build the Docker image
       run: docker build . -t newmandocker
     - name: Run docker container
 #      run: docker run --name newman-container --mount type=bind,source=my-vol,target=/newman newmandocker
-      run: docker run --name newman-container -v my-vol:/newman newmandocker
+      run: docker run -v myvol:/newman newmandocker
     - name: list volumes
       run: docker volume ls
     - name: cd reports
