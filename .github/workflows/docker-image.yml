@@ -32,10 +32,8 @@ jobs:
       run: docker run -v myvol:/newman newmandocker
     - name: list volumes
       run: docker volume ls
-    - name: cd reports
-      run: cd /home/runner/work/postman-newman/postman-newman/reports
     - name: check1
-      run: ls -a
+      run: ls -a reports/
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
