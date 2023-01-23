@@ -33,7 +33,7 @@ jobs:
     - name: list volumes
       run: docker volume ls
     - name: cd reports
-      run: docker volume ls
+      run: cd reports
     - name: check1
       run: ls -a
     - name: Archive production artifacts
