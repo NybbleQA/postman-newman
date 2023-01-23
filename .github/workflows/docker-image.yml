@@ -13,10 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: create dir
+      run: mkdir reports
     - name: check1
       run: ls
+    - name: pwd
+      run: pwd
     - name: docker try
-      run: docker volume create --name my-vol --opt type=none --opt device=/ --opt o=bind
+      run: docker volume create --name my-vol --opt type=none --opt device=/reports --opt o=bind
     - name: list volumes
       run: docker volume ls
     - name: inspect volumes
