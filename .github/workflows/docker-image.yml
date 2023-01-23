@@ -20,7 +20,7 @@ jobs:
     - name: pwd
       run: pwd
     - name: docker try
-      run: docker volume create --name myvol --opt type=none --opt device=/reports --opt o=bind
+      run: docker volume create --name myvol --opt type=none --opt device="/home/runner/work/postman-newman/postman-newman/reports" --opt o=bind
     - name: list volumes
       run: docker volume ls
     - name: inspect volumes
