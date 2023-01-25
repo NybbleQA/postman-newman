@@ -1,0 +1,28 @@
+name: github actions
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: crete dir 
+      run: mkdir reports
+    - name: docker create volume
+      run: docker create volume --name myvol --opt type=none --opt device="/home/runner/work/postman-newman/postman-newman/reports" --opt o=bind
+    - name: Build the Docker image
+      run: docker build . -t newmandocker
+    - name: run docker container
+      run: docker run -v myvol:/newman newmandocker
+    - name: artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: test reports
+        path: |
+            /home/runner/work/postman-newman/postman-newman/reports
