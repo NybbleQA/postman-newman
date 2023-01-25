@@ -21,7 +21,7 @@ jobs:
       run: docker build . -t newmandocker
     - name: Run docker container
 #      run: docker run -v myvol:/newman newmandocker
-      run: docker run -v /home/runner/work/postman-newman/postman-newman/reports:/newman busybox ls /reports
+      run: docker run -v /home/runner/work/postman-newman/postman-newman/reports:/newman newmandocker ls /reports
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
