@@ -26,5 +26,5 @@ jobs:
       with:
           name: test report
           path: |
-            /reports
+            /home/runner/work/postman-newman/postman-newman/reports
 
