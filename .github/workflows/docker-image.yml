@@ -17,7 +17,7 @@ jobs:
       run: mkdir reports
     - name: docker create volume
 #      run: docker volume create --name myvol --opt type=none --opt device="/home/runner/work/postman-newman/postman-newman/reports" --opt o=bind
-      run: docker volume create --name myvol --opt device="/home/runner/work/postman-newman/postman-newman/reports" --opt o=bind
+      run: docker volume create --name --opt type=none myvol --opt device="/home/runner/work/postman-newman/postman-newman/reports"
     - name: Build the Docker image
       run: docker build . -t newmandocker
     - name: Run docker container
