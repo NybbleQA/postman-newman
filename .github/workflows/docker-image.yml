@@ -21,7 +21,7 @@ jobs:
     - name: run docker container
       run: docker run -v myvol:/newman newmandocker
     - name: artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifcat@v3
       with:
         name: test reports
         path: |
