@@ -1,4 +1,4 @@
-name: Docker Github
+name: github actions
 
 on:
   push:
@@ -9,16 +9,14 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-    - name: create dir
+    - name: crete dir 
       run: mkdir reports
-    - name: docker volume create
-      run: docker volume create --name myvol --opt type=none --opt  device="/home/runner/work/postman-newman/postman-newman/reports" --opt o=bind
-    - name: Build docker image
+    - name: docker create volume
+      run: docker volume create  --name myvol --opt type=none --opt device="/home/runner/work/postman-newman/postman-newman/reports" --opt o=bind
+    - name: Build the Docker image
       run: docker build . -t newmandocker
     - name: run docker container
       run: docker run -v myvol:/newman newmandocker
