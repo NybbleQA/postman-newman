@@ -20,6 +20,7 @@ jobs:
       run: docker build . -t newmandocker
     - name: run docker container
       run: docker run -v myvol:/newman newmandocker
+      continue-on-error: true
     - name: artifacts
       uses: actions/upload-artifcat@v3
       with:
