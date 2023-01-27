@@ -22,7 +22,7 @@ jobs:
       run: docker run -v myvol:/newman newmandocker
       #continue-on-error: true
     - name: artifacts
-      if: ${{ failure() }}
+      if: ${{ failure() || success()}}
       uses: actions/upload-artifact@v3
       with:
         name: test reports
