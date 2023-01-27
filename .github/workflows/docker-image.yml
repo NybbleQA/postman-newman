@@ -21,27 +21,6 @@ jobs:
     - name: run docker container
       run: docker run -v myvol:/newman newmandocker
       #continue-on-error: true
-    - name: Send custom JSON data to Slack workflow
-      id: slack
-      uses: slackapi/slack-github-action@v1.23.0
-      with:
-        # For posting a rich message using Block Kit
-        payload: |
-          {
-            "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                }
-              }
-            ]
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
     - name: artifacts
       if: ${{ failure() || success()}}
       uses: actions/upload-artifact@v3
@@ -49,3 +28,9 @@ jobs:
         name: test reports
         path: |
             /home/runner/work/postman-newman/postman-newman/reports
+    - name: Notify slack
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: pullreminders/slack-action@master
+      with:
+        args: '{\"channel\":\"C04LVHM9351\",\"text\":\"Hello world\"}'
