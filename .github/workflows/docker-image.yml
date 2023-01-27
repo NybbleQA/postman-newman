@@ -21,13 +21,6 @@ jobs:
     - name: run docker container
       run: docker run -v myvol:/newman newmandocker
       #continue-on-error: true
-    - name: artifacts
-      if: ${{ failure() || success()}}
-      uses: actions/upload-artifact@v3
-      with:
-        name: test reports
-        path: |
-            /home/runner/work/postman-newman/postman-newman/reports
     - name: Send custom JSON data to Slack workflow
       id: slack
       uses: slackapi/slack-github-action@v1.23.0
@@ -49,3 +42,10 @@ jobs:
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+    - name: artifacts
+      if: ${{ failure() || success()}}
+      uses: actions/upload-artifact@v3
+      with:
+        name: test reports
+        path: |
+            /home/runner/work/postman-newman/postman-newman/reports
