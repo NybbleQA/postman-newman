@@ -39,5 +39,12 @@ jobs:
       if: ${{ failure() || success()}}
       id: slack
       uses: slackapi/slack-github-action@v1.23.0
+      with:
+        # This data can be any valid JSON from a previous step in the GitHub Action
+        payload: |
+          {
+            "key": "value",
+            "foo": "bar"
+          }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
