@@ -36,6 +36,7 @@ jobs:
      # with:
       #  args: '{\"channel\":\"C04LVHM9351\",\"text\":\"Hello world\"}'
     - name: Send GitHub Action trigger data to Slack workflow
+      if: ${{ failure() || success()}}
       id: slack
       uses: slackapi/slack-github-action@v1.23.0
       env:
