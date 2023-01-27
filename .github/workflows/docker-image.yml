@@ -29,6 +29,7 @@ jobs:
         path: |
             /home/runner/work/postman-newman/postman-newman/reports
     - name: Notify slack
+      if: ${{ failure() || success()}}
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       uses: pullreminders/slack-action@master
