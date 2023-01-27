@@ -28,10 +28,15 @@ jobs:
         name: test reports
         path: |
             /home/runner/work/postman-newman/postman-newman/reports
-    - name: Notify slack
-      if: ${{ failure() || success()}}
+#    - name: Notify slack
+ #     if: ${{ failure() || success()}}
+  #    env:
+   #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    #  uses: pullreminders/slack-action@master
+     # with:
+      #  args: '{\"channel\":\"C04LVHM9351\",\"text\":\"Hello world\"}'
+    - name: Send GitHub Action trigger data to Slack workflow
+      id: slack
+      uses: slackapi/slack-github-action@v1.23.0
       env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      uses: pullreminders/slack-action@master
-      with:
-        args: '{\"channel\":\"C04LVHM9351\",\"text\":\"Hello world\"}'
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
