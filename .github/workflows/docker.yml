@@ -21,6 +21,7 @@ jobs:
     - name: run docker image
       run: docker run -v myvol:/newman newmandocker
     - name: artifacts
+      if: ${{ failure() || success()}}
       uses: actions/upload-artifact@v3
       with:
         name: test reports
