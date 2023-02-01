@@ -1,0 +1,40 @@
+name: Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: crear dir
+      run: mkdir reports
+    - name: docker create volume
+      run: docker volume create --name myvol --opt type=none --opt device="/home/runner/work/postman-newman/postman-newman/reports" --opt o=bind
+    - name: build docker
+      run: docker build . -t newmandocker
+    - name: run docker image
+      run: docker run -v myvol:/newman newmandocker
+    - name: artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: test reports
+        path: /home/runner/work/postman-newman/postman-newman/reports
+    - name: Send GitHub Action trigger data to Slack workflow
+      if: ${{ failure() || success()}}
+      id: slack
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+        payload: |
+          {
+            "text":"GitHub build result: ${{ job.status }}\nCommit dif: ${{ github.event.pull_request.html_url || github.event.head_commit.url }} \nBuild GitActions: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+            "key": "value",
+            "foo": "bar"
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
